@@ -27,7 +27,7 @@ func partition(low, high int, arr *[]int) int {
 	i := low
 	j := high - 1
 
-	for true {
+	for {
 		if i >= j {
 			break
 		}
