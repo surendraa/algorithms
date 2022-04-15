@@ -4,7 +4,27 @@ import "fmt"
 
 var chessBoard [][]int
 
-func NQueens(n int) {
+func NQueensRecursive(n int) [][]int {
+
+	chessBoard = make([][]int, n)
+	for i := 0; i < n; i++ {
+		chessBoard[i] = make([]int, n)
+		for j := 0; j < n; j++ {
+			chessBoard[i][j] = 0
+		}
+	}
+	// printBoard()
+
+	if nqueensrecursive(0, n) {
+		printBoard()
+		return chessBoard
+	} else {
+		fmt.Println("No solution available")
+		return nil
+	}
+}
+
+func NQueensStack(n int) [][]int {
 
 	chessBoard = make([][]int, n)
 	for i := 0; i < n; i++ {
@@ -17,8 +37,10 @@ func NQueens(n int) {
 
 	if nqueensstack(n) {
 		printBoard()
+		return chessBoard
 	} else {
 		fmt.Println("No solution available")
+		return nil
 	}
 }
 
@@ -67,7 +89,7 @@ func nqueensstack(n int) bool {
 }
 
 // recursive implementation of nqueens
-func nqueens(col int, n int) bool {
+func nqueensrecursive(col int, n int) bool {
 	if col >= n {
 		return true
 	}
@@ -77,7 +99,7 @@ func nqueens(col int, n int) bool {
 			// place a queen
 			chessBoard[row][col] = 1
 
-			if nqueens(col+1, n) {
+			if nqueensrecursive(col+1, n) {
 				return true
 			}
 
